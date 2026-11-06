@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 path_name = Path(__file__).parent.parent / 'data' / 'weather_data.json'
-columns_names_to_drop = ['weather', 'weather_json', 'sys.type']
+columns_names_to_drop = ['weather', 'weather_icon', 'sys.type']
 columns_names_to_rename = {
         "base": "base",
         "visibility": "visibility",
@@ -53,7 +53,7 @@ def create_dataframe(path_name):
 
 
     df = pd.json_normalize(data)
-    logging.info(f"\n DataFrame created with {len(df)} line(s)")
+    logging.info(f"DataFrame created with {len(df)} line(s)")
     return df
 
 
@@ -67,7 +67,7 @@ def normalize_weather_columns(df):
         'icon':'weather_icon'
     })
 
-    df = pd.concat({df, df_weather}, axis=1)
+    df = pd.concat([df, df_weather], axis=1)
     logging.info(f"\n Column 'weather' normalized - {len(df.columns)} columns")
     return df
 
@@ -101,3 +101,4 @@ def data_transformations():
     df = rename_columns(df, columns_names_to_rename)
     df = normalize_datetime_columns(df, columns_to_normalize_datetime)
     logging.info("Transformations completed")
+    return df
