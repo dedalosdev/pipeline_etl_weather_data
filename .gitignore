@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Temporary or sensitive data
+data/temp/
+data/*.csv
+data/*.xlsx
+*.tmp
+/data
+/config
+
+# Backup files
+*.bak
+*.backup
+# Docker
+.docker/
+docker-compose.override.yml
+.dockerignore
+postgres-db-volume/
